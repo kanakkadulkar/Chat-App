@@ -46,19 +46,28 @@ const Login=()=> {
           const res = await createUserWithEmailAndPassword(auth, email, password);
           const imgUrl=await upload(avatar.file)
 
-          await setDoc(doc(db, "users", res.user.uid), {
+          await setDoc(doc(db, "users", res.user.uid),
+          {
             username,
             email,
             avatar:imgUrl,
             id: res.user.uid,
             blocked: [],
-          });
-          console.log("hi")
-          await setDoc(doc(db, "userchats", res.user.uid), {
+          }
+          
+        );
+        console.log("heheh");
+          await setDoc(doc(db, "userchats", res.user.uid),
+           {
             chats: [],
-          });
+          }
+        );
+        console.log("heheh")
+        console.log("complete")
           toast.success("Account created! You can login now");
-        } catch (err) {
+          
+        } 
+        catch (err) {
           console.log(err.message);
           toast.error(err.message);
         }
