@@ -39,39 +39,46 @@ const Login=()=> {
 
       const handleRegister = async (e) => {
         e.preventDefault();
+      
         const formData = new FormData(e.target);
         const { username, email, password } = Object.fromEntries(formData);
-        
+      
+        if (!username || !email || !password) {
+          toast.error("All fields are required!");
+          return;
+        }
+      
         try {
           const res = await createUserWithEmailAndPassword(auth, email, password);
-          const imgUrl=await upload(avatar.file)
-
-          await setDoc(doc(db, "users", res.user.uid),
-          {
+          console.log("User registered successfully:", res.user.uid);
+      
+          let imgUrl = "";
+          if (avatar?.file) {
+            imgUrl = await upload(avatar.file);
+            console.log("Avatar uploaded successfully:", imgUrl);
+          }
+      
+          await setDoc(doc(db, "users", res.user.uid), {
             username,
             email,
-            avatar:imgUrl,
+            avatar: imgUrl,
             id: res.user.uid,
             blocked: [],
-          }
-          
-        );
-        console.log("heheh");
-          await setDoc(doc(db, "userchats", res.user.uid),
-           {
+          });
+          console.log("User document created successfully");
+      
+          await setDoc(doc(db, "userchats", res.user.uid), {
             chats: [],
-          }
-        );
-        console.log("heheh")
-        console.log("complete")
+          });
+          console.log("User chats document initialized");
+      
           toast.success("Account created! You can login now");
-          
-        } 
-        catch (err) {
-          console.log(err.message);
+        } catch (err) {
+          console.error("Error during registration:", err.message);
           toast.error(err.message);
         }
       };
+      
     
 
   return (
