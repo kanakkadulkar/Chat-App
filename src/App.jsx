@@ -13,7 +13,7 @@ const App = () => {
   const user=false;
   useEffect(()=>{
      const unSub=onAuthStateChanged(auth,(user)=>{
-      console.log(user);
+      console.log(user.uid);
     });
 
       return()=>{
