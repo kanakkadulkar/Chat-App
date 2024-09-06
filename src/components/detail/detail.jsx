@@ -1,4 +1,5 @@
 
+import { auth } from '../../lib/firebase'
 import './detail.css'
 
 const Detail=()=> {
@@ -40,20 +41,6 @@ const Detail=()=> {
             <img src="./download.png" alt="" className='icon'/>
           </div>
 
-          <div className="photoItem">
-              <div className="photodetails">
-                
-             
-          
-                
-             
-           
-             
-              <img src='' alt=''/>
-              <span>byfbrbfbrb</span>
-            </div>
-            <img src="./download.png" alt="" className='icon'/>
-          </div>
           
         </div> 
         </div>
@@ -67,6 +54,7 @@ const Detail=()=> {
         </div>
        
        <button>Block User</button>
+       <button className='logout' onClick={()=>auth.signOut()}>Logout </button>
         
       </div>
      
