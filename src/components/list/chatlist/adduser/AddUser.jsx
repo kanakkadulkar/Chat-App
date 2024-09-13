@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import './addUser.css'
-import { collection, getDoc, getDocs, query, where } from 'firebase/firestore'
+import { collection, getDocs, query, where } from 'firebase/firestore'
 import { db } from '../../../../lib/firebase'
 
 
@@ -27,9 +27,6 @@ import { db } from '../../../../lib/firebase'
    }catch(err){
       console.error(err)
    }
-
-
-
 
  }
   return (
