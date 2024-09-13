@@ -7,11 +7,8 @@ export const useUserStore = create((set) => ({
   isLoading: true,
 
   fetchUserInfo: async (uid) => {
-    if (!uid) {
-      // Make sure you're setting the state when uid is null
-      set({ currentUser: null, isLoading: false });
-      return;
-    }
+    if (!uid) return set({ currentUser: null, isLoading: false });
+    
 
     try {
       const docRef = doc(db, "users", uid);
@@ -24,8 +21,7 @@ export const useUserStore = create((set) => ({
       }
     } catch (err) {
       console.log(err);
-      // Set state properly when there's an error
-      set({ currentUser: null, isLoading: false });
+      return set({ currentUser: null, isLoading: false });
     }
   },
 }));
