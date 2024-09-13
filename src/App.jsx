@@ -15,7 +15,7 @@ const App = () => {
   useEffect(() => {
     
     const unSub = onAuthStateChanged(auth, (user) => {
-      fetchUserInfo(user.uid);
+      fetchUserInfo(user?.uid);
     });
 
     return () => {
